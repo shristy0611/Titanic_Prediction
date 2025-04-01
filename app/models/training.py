@@ -5,15 +5,21 @@ from sklearn.model_selection import cross_val_score
 import joblib
 
 from app.config import MODEL_FEATURES, MODEL_ARTIFACT_PATH, OPTUNA_TRIALS
+from app.services.feature_engineering import FeatureEngineer # Import FeatureEngineer
 
 class TitanicModel:
     def __init__(self):
         self.model = None
         self.model_version = "1.0"
+        self.feature_engineer = FeatureEngineer() # Instantiate FeatureEngineer
 
     def train(self, df: pd.DataFrame):
-        X = df[MODEL_FEATURES]
-        y = df['Survived']
+        # Apply feature engineering first
+        df_transformed = self.feature_engineer.transform(df)
+        
+        # Select features and target from the *transformed* DataFrame
+        X = df_transformed[MODEL_FEATURES] 
+        y = df_transformed['Survived']
         
         study = optuna.create_study(direction="maximize")
         study.optimize(lambda trial: self._objective(trial, X, y), n_trials=OPTUNA_TRIALS)

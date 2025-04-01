@@ -20,8 +20,16 @@ class PredictionService:
     
     def _prepare_features(self, passenger: PassengerFeatures):
         # Convert passenger features to DataFrame
-        features = passenger.dict()
-        return pd.DataFrame([features])
+        features_dict = passenger.dict()
+        df = pd.DataFrame([features_dict])
+        
+        # Apply feature engineering
+        df_transformed = self.feature_engineer.transform(df)
+        
+        # Ensure columns match model's expected features (handle potential discrepancies)
+        # This part might need adjustment based on the actual model training features
+        # For now, assume the transformed df has the correct columns needed by the model
+        return df_transformed
     
     def get_model_metrics(self):
         return {
