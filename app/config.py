@@ -13,23 +13,7 @@ BASE_FEATURES = ['Age', 'Fare', 'FamilySize', 'Pclass', 'IsAlone']
 ONE_HOT_FEATURES = [
     'Sex_male', 
     'Embarked_Q', 
-    'Embarked_S', 
-    'Title_Col', 
-    'Title_Countess', 
-    'Title_Don', 
-    'Title_Dr', 
-    'Title_Jonkheer', 
-    'Title_Lady', 
-    'Title_Major', 
-    'Title_Master', 
-    'Title_Miss', 
-    'Title_Mlle', 
-    'Title_Mme', 
-    'Title_Mr', 
-    'Title_Mrs', 
-    'Title_Ms', 
-    'Title_Rev', 
-    'Title_Sir'
+    'Embarked_S'
 ]
 MODEL_FEATURES = BASE_FEATURES + ONE_HOT_FEATURES
 
